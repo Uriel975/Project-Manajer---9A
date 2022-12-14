@@ -1,0 +1,135 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Administrador = (List<Project_Manager.Services.BO.TblAdministradorBO>)ViewBag.AdministradorList;
+
+
+}
+
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Tablas de administradores</h1>
+            <p class="mb-4">Esta tabla contiene todos los datos basicos de todos los administardores.</p>
+            <!-- DataTales Example -->
+            @if (Administrador.Count > 0)
+            {
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Datos de los administradores</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellidos</th>
+                                        <th scope="col">Correo</th>
+                                        <th>Accesorios</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (Project_Manager.Services.BO.TblAdministradorBO item in Administrador)
+                                    {
+                                        <tr>
+                                            <td>@item.NombreAdmin</td>
+                                            <td>@item.ApellidoPAdmin @item.ApellidoMAdmin</td>
+                                            <td align="center">@item.CorreoAdmin</td>
+
+                                            <td align="center">
+                                                <button type="button" onclick="Administrador.evts.getAdministradorInfo('@item.IDAdmin', '@item.NombreAdmin', '@item.CorreoAdmin', '@item.FKUsuario')" class="btn btn-warning btn-xs" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>
+                                                <button type="button" onclick="Administrador.evts.updateStatus('@item.IDAdmin', '0')" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h2>No Se A Registrado A Algun Administrador</h2>
+
+            }
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Luis A. Martin 2020</span>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- UPDATE -->
+<div class="modal fade" tabindex="-1" role="dialog" id="mdlDetail">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <form id="formCreate" class="modal-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="col-12 modal-title text-center" id="employeeStr">Nuevo Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--BODY BODY BODY-->
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nombre del Administrador</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtNombreAdm" id="txtNombreAdm" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <input type="hidden" autocomplete="off" class="form-control" name="txtUsuarioAdm" id="txtUsuarioAdm" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Correo Electronico</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtCorreoAdm" id="txtCorreoAdm" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/Administrador.js"></script>
+<script>
+    $(function () {
+        Administrador.init();
+    });
+</script>
+
+
+
+

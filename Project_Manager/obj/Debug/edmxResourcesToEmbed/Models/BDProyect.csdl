@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_APManagerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblAdministrador">
+    <Key>
+      <PropertyRef Name="IDAdmin" />
+    </Key>
+    <Property Name="IDAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoAdmin" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FKRol" Type="Int32" Nullable="false" />
+    <Property Name="FKCuenta" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblCuenta" Relationship="Self.tblAdministradorCuenta" FromRole="tblAdministrador" ToRole="tblCuenta" />
+    <NavigationProperty Name="tblRol" Relationship="Self.tblAdministradorRol" FromRole="tblAdministrador" ToRole="tblRol" />
+  </EntityType>
+  <EntityType Name="tblAsignacion">
+    <Key>
+      <PropertyRef Name="IDAsignacion" />
+    </Key>
+    <Property Name="IDAsignacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EstadoAsignacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FKEmpleado" Type="Int32" Nullable="false" />
+    <Property Name="FKProblemas" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblEmpleado" Relationship="Self.tblAsignacionEmpleado" FromRole="tblAsignacion" ToRole="tblEmpleado" />
+  </EntityType>
+  <EntityType Name="tblCliente">
+    <Key>
+      <PropertyRef Name="IDCliente" />
+    </Key>
+    <Property Name="IDCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoCliente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelefonoCliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="GeneroCliente" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="EmpresaCliente" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RepresentanteCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FKRol" Type="Int32" Nullable="false" />
+    <Property Name="FKCuenta" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblCuenta" Relationship="Self.tblClienteCuenta" FromRole="tblCliente" ToRole="tblCuenta" />
+    <NavigationProperty Name="tblRol" Relationship="Self.tblClienteRol" FromRole="tblCliente" ToRole="tblRol" />
+    <NavigationProperty Name="tblProblema" Relationship="Self.tblProblemasCliente" FromRole="tblCliente" ToRole="tblProblema" />
+    <NavigationProperty Name="tblProyectos" Relationship="Self.tblProyectoCliente" FromRole="tblCliente" ToRole="tblProyectos" />
+  </EntityType>
+  <EntityType Name="tblCuenta">
+    <Key>
+      <PropertyRef Name="IDCuenta" />
+    </Key>
+    <Property Name="IDCuenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CorreoCuenta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ContraCuenta" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblAdministrador" Relationship="Self.tblAdministradorCuenta" FromRole="tblCuenta" ToRole="tblAdministrador" />
+    <NavigationProperty Name="tblCliente" Relationship="Self.tblClienteCuenta" FromRole="tblCuenta" ToRole="tblCliente" />
+    <NavigationProperty Name="tblEmpleado" Relationship="Self.TblEmpleadosCuenta" FromRole="tblCuenta" ToRole="tblEmpleado" />
+  </EntityType>
+  <EntityType Name="tblDocumentacion">
+    <Key>
+      <PropertyRef Name="IDDocumentacion" />
+    </Key>
+    <Property Name="IDDocumentacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TituloDocumentacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DescripcionDocumentacion" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EstimacionDocumentacion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FechaDocumentacion" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FKAsignacion" Type="Int32" Nullable="false" />
+    <Property Name="FKEmpleado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblEmpleado" Relationship="Self.tblDocumentacionEmpleado" FromRole="tblDocumentacion" ToRole="tblEmpleado" />
+  </EntityType>
+  <EntityType Name="tblEmpleado">
+    <Key>
+      <PropertyRef Name="IDEmpleado" />
+    </Key>
+    <Property Name="IDEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApellidoEmpleado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TelefonoEmpleado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nacimiento" Type="DateTime" Precision="0" />
+    <Property Name="GeneroEmpleado" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FKRol" Type="Int32" Nullable="false" />
+    <Property Name="FKCuenta" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblAsignacion" Relationship="Self.tblAsignacionEmpleado" FromRole="tblEmpleado" ToRole="tblAsignacion" />
+    <NavigationProperty Name="tblCuenta" Relationship="Self.TblEmpleadosCuenta" FromRole="tblEmpleado" ToRole="tblCuenta" />
+    <NavigationProperty Name="tblDocumentacion" Relationship="Self.tblDocumentacionEmpleado" FromRole="tblEmpleado" ToRole="tblDocumentacion" />
+    <NavigationProperty Name="tblRol" Relationship="Self.TblEmpleadosRol" FromRole="tblEmpleado" ToRole="tblRol" />
+    <NavigationProperty Name="tblTarjeta" Relationship="Self.tblTarjetaCliente" FromRole="tblEmpleado" ToRole="tblTarjeta" />
+  </EntityType>
+  <EntityType Name="tblProblema">
+    <Key>
+      <PropertyRef Name="IDProblema" />
+    </Key>
+    <Property Name="IDProblema" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TituloProblema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DescripcionProblema" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+    <Property Name="FechaProblema" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FKProyecto" Type="Int32" Nullable="false" />
+    <Property Name="FKCliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblCliente" Relationship="Self.tblProblemasCliente" FromRole="tblProblema" ToRole="tblCliente" />
+  </EntityType>
+  <EntityType Name="tblProyectos">
+    <Key>
+      <PropertyRef Name="IDProyecto" />
+    </Key>
+    <Property Name="IDProyecto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombreProyecto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DescripcionProyecto" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PrioridadProyecto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FechaProyecto" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EstadoProyecto" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FKCliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblCliente" Relationship="Self.tblProyectoCliente" FromRole="tblProyectos" ToRole="tblCliente" />
+  </EntityType>
+  <EntityType Name="tblRol">
+    <Key>
+      <PropertyRef Name="IDRol" />
+    </Key>
+    <Property Name="IDRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblAdministrador" Relationship="Self.tblAdministradorRol" FromRole="tblRol" ToRole="tblAdministrador" />
+    <NavigationProperty Name="tblCliente" Relationship="Self.tblClienteRol" FromRole="tblRol" ToRole="tblCliente" />
+    <NavigationProperty Name="tblEmpleado" Relationship="Self.TblEmpleadosRol" FromRole="tblRol" ToRole="tblEmpleado" />
+  </EntityType>
+  <EntityType Name="tblTarjeta">
+    <Key>
+      <PropertyRef Name="IDTarjeta" />
+    </Key>
+    <Property Name="IDTarjeta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroTarjeta" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CVVTarjeta" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FechaTarjeta" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FKCliente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblEmpleado" Relationship="Self.tblTarjetaCliente" FromRole="tblTarjeta" ToRole="tblEmpleado" />
+  </EntityType>
+  <Association Name="tblAdministradorCuenta">
+    <End Role="tblCuenta" Type="Self.tblCuenta" Multiplicity="1" />
+    <End Role="tblAdministrador" Type="Self.tblAdministrador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="tblAdministrador">
+        <PropertyRef Name="FKCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblAdministradorRol">
+    <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+    <End Role="tblAdministrador" Type="Self.tblAdministrador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRol">
+        <PropertyRef Name="IDRol" />
+      </Principal>
+      <Dependent Role="tblAdministrador">
+        <PropertyRef Name="FKRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblAsignacionEmpleado">
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="1" />
+    <End Role="tblAsignacion" Type="Self.tblAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="tblAsignacion">
+        <PropertyRef Name="FKEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblClienteCuenta">
+    <End Role="tblCuenta" Type="Self.tblCuenta" Multiplicity="1" />
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="tblCliente">
+        <PropertyRef Name="FKCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblClienteRol">
+    <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRol">
+        <PropertyRef Name="IDRol" />
+      </Principal>
+      <Dependent Role="tblCliente">
+        <PropertyRef Name="FKRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblProblemasCliente">
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+    <End Role="tblProblema" Type="Self.tblProblema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCliente">
+        <PropertyRef Name="IDCliente" />
+      </Principal>
+      <Dependent Role="tblProblema">
+        <PropertyRef Name="FKCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblProyectoCliente">
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+    <End Role="tblProyectos" Type="Self.tblProyectos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCliente">
+        <PropertyRef Name="IDCliente" />
+      </Principal>
+      <Dependent Role="tblProyectos">
+        <PropertyRef Name="FKCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TblEmpleadosCuenta">
+    <End Role="tblCuenta" Type="Self.tblCuenta" Multiplicity="1" />
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="tblEmpleado">
+        <PropertyRef Name="FKCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblDocumentacionEmpleado">
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="1" />
+    <End Role="tblDocumentacion" Type="Self.tblDocumentacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="tblDocumentacion">
+        <PropertyRef Name="FKEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TblEmpleadosRol">
+    <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRol">
+        <PropertyRef Name="IDRol" />
+      </Principal>
+      <Dependent Role="tblEmpleado">
+        <PropertyRef Name="FKRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblTarjetaCliente">
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="1" />
+    <End Role="tblTarjeta" Type="Self.tblTarjeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="tblTarjeta">
+        <PropertyRef Name="FKCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_APManagerEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="tblAdministrador" EntityType="Self.tblAdministrador" />
+    <EntitySet Name="tblAsignacion" EntityType="Self.tblAsignacion" />
+    <EntitySet Name="tblCliente" EntityType="Self.tblCliente" />
+    <EntitySet Name="tblCuenta" EntityType="Self.tblCuenta" />
+    <EntitySet Name="tblDocumentacion" EntityType="Self.tblDocumentacion" />
+    <EntitySet Name="tblEmpleado" EntityType="Self.tblEmpleado" />
+    <EntitySet Name="tblProblema" EntityType="Self.tblProblema" />
+    <EntitySet Name="tblProyectos" EntityType="Self.tblProyectos" />
+    <EntitySet Name="tblRol" EntityType="Self.tblRol" />
+    <EntitySet Name="tblTarjeta" EntityType="Self.tblTarjeta" />
+    <AssociationSet Name="tblAdministradorCuenta" Association="Self.tblAdministradorCuenta">
+      <End Role="tblCuenta" EntitySet="tblCuenta" />
+      <End Role="tblAdministrador" EntitySet="tblAdministrador" />
+    </AssociationSet>
+    <AssociationSet Name="tblAdministradorRol" Association="Self.tblAdministradorRol">
+      <End Role="tblRol" EntitySet="tblRol" />
+      <End Role="tblAdministrador" EntitySet="tblAdministrador" />
+    </AssociationSet>
+    <AssociationSet Name="tblAsignacionEmpleado" Association="Self.tblAsignacionEmpleado">
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+      <End Role="tblAsignacion" EntitySet="tblAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="tblClienteCuenta" Association="Self.tblClienteCuenta">
+      <End Role="tblCuenta" EntitySet="tblCuenta" />
+      <End Role="tblCliente" EntitySet="tblCliente" />
+    </AssociationSet>
+    <AssociationSet Name="tblClienteRol" Association="Self.tblClienteRol">
+      <End Role="tblRol" EntitySet="tblRol" />
+      <End Role="tblCliente" EntitySet="tblCliente" />
+    </AssociationSet>
+    <AssociationSet Name="tblProblemasCliente" Association="Self.tblProblemasCliente">
+      <End Role="tblCliente" EntitySet="tblCliente" />
+      <End Role="tblProblema" EntitySet="tblProblema" />
+    </AssociationSet>
+    <AssociationSet Name="tblProyectoCliente" Association="Self.tblProyectoCliente">
+      <End Role="tblCliente" EntitySet="tblCliente" />
+      <End Role="tblProyectos" EntitySet="tblProyectos" />
+    </AssociationSet>
+    <AssociationSet Name="TblEmpleadosCuenta" Association="Self.TblEmpleadosCuenta">
+      <End Role="tblCuenta" EntitySet="tblCuenta" />
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="tblDocumentacionEmpleado" Association="Self.tblDocumentacionEmpleado">
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+      <End Role="tblDocumentacion" EntitySet="tblDocumentacion" />
+    </AssociationSet>
+    <AssociationSet Name="TblEmpleadosRol" Association="Self.TblEmpleadosRol">
+      <End Role="tblRol" EntitySet="tblRol" />
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="tblTarjetaCliente" Association="Self.tblTarjetaCliente">
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+      <End Role="tblTarjeta" EntitySet="tblTarjeta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

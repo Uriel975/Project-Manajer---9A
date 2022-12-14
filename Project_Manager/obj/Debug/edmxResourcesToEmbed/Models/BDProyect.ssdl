@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_APManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblAdministrador">
+    <Key>
+      <PropertyRef Name="IDAdmin" />
+    </Key>
+    <Property Name="IDAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreAdmin" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoAdmin" Type="varchar" MaxLength="50" />
+    <Property Name="FKRol" Type="int" Nullable="false" />
+    <Property Name="FKCuenta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblAsignacion">
+    <Key>
+      <PropertyRef Name="IDAsignacion" />
+    </Key>
+    <Property Name="IDAsignacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EstadoAsignacion" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="FKEmpleado" Type="int" Nullable="false" />
+    <Property Name="FKProblemas" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCliente">
+    <Key>
+      <PropertyRef Name="IDCliente" />
+    </Key>
+    <Property Name="IDCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreCliente" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoCliente" Type="varchar" MaxLength="50" />
+    <Property Name="TelefonoCliente" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="GeneroCliente" Type="char" MaxLength="1" />
+    <Property Name="EmpresaCliente" Type="varchar" MaxLength="75" Nullable="false" />
+    <Property Name="RepresentanteCliente" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FKRol" Type="int" Nullable="false" />
+    <Property Name="FKCuenta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCuenta">
+    <Key>
+      <PropertyRef Name="IDCuenta" />
+    </Key>
+    <Property Name="IDCuenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CorreoCuenta" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContraCuenta" Type="varchar" MaxLength="18" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDocumentacion">
+    <Key>
+      <PropertyRef Name="IDDocumentacion" />
+    </Key>
+    <Property Name="IDDocumentacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TituloDocumentacion" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DescripcionDocumentacion" Type="varchar" MaxLength="8000" Nullable="false" />
+    <Property Name="EstimacionDocumentacion" Type="date" Nullable="false" />
+    <Property Name="FechaDocumentacion" Type="date" Nullable="false" />
+    <Property Name="FKAsignacion" Type="int" Nullable="false" />
+    <Property Name="FKEmpleado" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblEmpleado">
+    <Key>
+      <PropertyRef Name="IDEmpleado" />
+    </Key>
+    <Property Name="IDEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEmpleado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoEmpleado" Type="varchar" MaxLength="50" />
+    <Property Name="TelefonoEmpleado" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nacimiento" Type="date" />
+    <Property Name="GeneroEmpleado" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="FKRol" Type="int" Nullable="false" />
+    <Property Name="FKCuenta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblProblema">
+    <Key>
+      <PropertyRef Name="IDProblema" />
+    </Key>
+    <Property Name="IDProblema" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TituloProblema" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DescripcionProblema" Type="varchar" MaxLength="8000" />
+    <Property Name="FechaProblema" Type="date" Nullable="false" />
+    <Property Name="FKProyecto" Type="int" Nullable="false" />
+    <Property Name="FKCliente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblProyectos">
+    <Key>
+      <PropertyRef Name="IDProyecto" />
+    </Key>
+    <Property Name="IDProyecto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreProyecto" Type="varchar" MaxLength="50" />
+    <Property Name="DescripcionProyecto" Type="varchar" MaxLength="8000" Nullable="false" />
+    <Property Name="PrioridadProyecto" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FechaProyecto" Type="date" Nullable="false" />
+    <Property Name="EstadoProyecto" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FKCliente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblRol">
+    <Key>
+      <PropertyRef Name="IDRol" />
+    </Key>
+    <Property Name="IDRol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblTarjeta">
+    <Key>
+      <PropertyRef Name="IDTarjeta" />
+    </Key>
+    <Property Name="IDTarjeta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroTarjeta" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CVVTarjeta" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="FechaTarjeta" Type="varchar" MaxLength="5" Nullable="false" />
+    <Property Name="FKCliente" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="tblAdministradorCuenta">
+    <End Role="tblCuenta" Type="Self.tblCuenta" Multiplicity="1" />
+    <End Role="tblAdministrador" Type="Self.tblAdministrador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="tblAdministrador">
+        <PropertyRef Name="FKCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblAdministradorRol">
+    <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+    <End Role="tblAdministrador" Type="Self.tblAdministrador" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRol">
+        <PropertyRef Name="IDRol" />
+      </Principal>
+      <Dependent Role="tblAdministrador">
+        <PropertyRef Name="FKRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblAsignacionEmpleado">
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="1" />
+    <End Role="tblAsignacion" Type="Self.tblAsignacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="tblAsignacion">
+        <PropertyRef Name="FKEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblClienteCuenta">
+    <End Role="tblCuenta" Type="Self.tblCuenta" Multiplicity="1" />
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="tblCliente">
+        <PropertyRef Name="FKCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblClienteRol">
+    <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRol">
+        <PropertyRef Name="IDRol" />
+      </Principal>
+      <Dependent Role="tblCliente">
+        <PropertyRef Name="FKRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblDocumentacionEmpleado">
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="1" />
+    <End Role="tblDocumentacion" Type="Self.tblDocumentacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="tblDocumentacion">
+        <PropertyRef Name="FKEmpleado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TblEmpleadosCuenta">
+    <End Role="tblCuenta" Type="Self.tblCuenta" Multiplicity="1" />
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCuenta">
+        <PropertyRef Name="IDCuenta" />
+      </Principal>
+      <Dependent Role="tblEmpleado">
+        <PropertyRef Name="FKCuenta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TblEmpleadosRol">
+    <End Role="tblRol" Type="Self.tblRol" Multiplicity="1" />
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblRol">
+        <PropertyRef Name="IDRol" />
+      </Principal>
+      <Dependent Role="tblEmpleado">
+        <PropertyRef Name="FKRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblProblemasCliente">
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+    <End Role="tblProblema" Type="Self.tblProblema" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCliente">
+        <PropertyRef Name="IDCliente" />
+      </Principal>
+      <Dependent Role="tblProblema">
+        <PropertyRef Name="FKCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblProyectoCliente">
+    <End Role="tblCliente" Type="Self.tblCliente" Multiplicity="1" />
+    <End Role="tblProyectos" Type="Self.tblProyectos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCliente">
+        <PropertyRef Name="IDCliente" />
+      </Principal>
+      <Dependent Role="tblProyectos">
+        <PropertyRef Name="FKCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblTarjetaCliente">
+    <End Role="tblEmpleado" Type="Self.tblEmpleado" Multiplicity="1" />
+    <End Role="tblTarjeta" Type="Self.tblTarjeta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmpleado">
+        <PropertyRef Name="IDEmpleado" />
+      </Principal>
+      <Dependent Role="tblTarjeta">
+        <PropertyRef Name="FKCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_APManagerModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAdministrador" EntityType="Self.tblAdministrador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAsignacion" EntityType="Self.tblAsignacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCliente" EntityType="Self.tblCliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCuenta" EntityType="Self.tblCuenta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblDocumentacion" EntityType="Self.tblDocumentacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmpleado" EntityType="Self.tblEmpleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProblema" EntityType="Self.tblProblema" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProyectos" EntityType="Self.tblProyectos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblRol" EntityType="Self.tblRol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTarjeta" EntityType="Self.tblTarjeta" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="tblAdministradorCuenta" Association="Self.tblAdministradorCuenta">
+      <End Role="tblCuenta" EntitySet="tblCuenta" />
+      <End Role="tblAdministrador" EntitySet="tblAdministrador" />
+    </AssociationSet>
+    <AssociationSet Name="tblAdministradorRol" Association="Self.tblAdministradorRol">
+      <End Role="tblRol" EntitySet="tblRol" />
+      <End Role="tblAdministrador" EntitySet="tblAdministrador" />
+    </AssociationSet>
+    <AssociationSet Name="tblAsignacionEmpleado" Association="Self.tblAsignacionEmpleado">
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+      <End Role="tblAsignacion" EntitySet="tblAsignacion" />
+    </AssociationSet>
+    <AssociationSet Name="tblClienteCuenta" Association="Self.tblClienteCuenta">
+      <End Role="tblCuenta" EntitySet="tblCuenta" />
+      <End Role="tblCliente" EntitySet="tblCliente" />
+    </AssociationSet>
+    <AssociationSet Name="tblClienteRol" Association="Self.tblClienteRol">
+      <End Role="tblRol" EntitySet="tblRol" />
+      <End Role="tblCliente" EntitySet="tblCliente" />
+    </AssociationSet>
+    <AssociationSet Name="tblDocumentacionEmpleado" Association="Self.tblDocumentacionEmpleado">
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+      <End Role="tblDocumentacion" EntitySet="tblDocumentacion" />
+    </AssociationSet>
+    <AssociationSet Name="TblEmpleadosCuenta" Association="Self.TblEmpleadosCuenta">
+      <End Role="tblCuenta" EntitySet="tblCuenta" />
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="TblEmpleadosRol" Association="Self.TblEmpleadosRol">
+      <End Role="tblRol" EntitySet="tblRol" />
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+    </AssociationSet>
+    <AssociationSet Name="tblProblemasCliente" Association="Self.tblProblemasCliente">
+      <End Role="tblCliente" EntitySet="tblCliente" />
+      <End Role="tblProblema" EntitySet="tblProblema" />
+    </AssociationSet>
+    <AssociationSet Name="tblProyectoCliente" Association="Self.tblProyectoCliente">
+      <End Role="tblCliente" EntitySet="tblCliente" />
+      <End Role="tblProyectos" EntitySet="tblProyectos" />
+    </AssociationSet>
+    <AssociationSet Name="tblTarjetaCliente" Association="Self.tblTarjetaCliente">
+      <End Role="tblEmpleado" EntitySet="tblEmpleado" />
+      <End Role="tblTarjeta" EntitySet="tblTarjeta" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

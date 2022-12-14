@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "DetallesTask";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var TTareas = (List<Project_Manager.Services.BO.TblTomarTareaBO>)ViewBag.ListDetalles;
+    var Comen = (List<Project_Manager.Services.BO.TblComentarioBO>)ViewBag.ListaComentario;
+}
+
+<div style="padding:5%" class="container">
+    <div class="row">
+        @foreach (Project_Manager.Services.BO.TblTomarTareaBO item in TTareas)
+        {
+            <div class="col-6">
+
+                <div class="card">
+                    <div class="card-header text-sm-center py-3">
+                        <h3 class="m-0 font-weight-bold text-primary">
+                            @item._titulo |
+                            @switch (@item.Estado)
+                            {
+                                case 0:
+                                    <span class="text-right">Pendiente</span>
+                                    break;
+                                case 1:
+                                    <span class="text-right">Trabajando</span>
+                                    break;
+                                case 2:
+                                    <span class="text-right">Finalizado</span>
+                                    break;
+                                default:
+                                    <span class="text-right">S/N</span>
+                                    break;
+                            }
+                        </h3>
+                        <h6>
+                            @item._empleado | @item._telefono
+                        </h6>
+                    </div>
+                    <div class="card-body">@item._descripcion</div>
+                    <div class="card-footer text-sm-center">
+                        <h6>
+                            @item.FechaToma -
+                            @if (@item.FechaFinalizacion != "")
+                            {
+                                <span>@item.FechaFinalizacion</span>
+                            }
+                            else
+                            {
+                                <span>Sin Finalizar</span>
+                            }
+                        </h6>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-6">
+                <h2>Comentario</h2>
+                <div>
+                    <div class="container row contenedo_msj">
+                        @if (Comen.Count > 0)
+                        {
+                            foreach (Project_Manager.Services.BO.TblComentarioBO itemC in Comen)
+                            {
+                                if (itemC.FKUsuario == Session["Usuario"].ToString())
+                                {
+                                    <div class="mensaje-der col-12" style="padding:1%;">
+                                        <div class="cuerpo_msj">
+                                            <div class="msj-texto">
+                                                <span class="tiempo"><i class="icon-clock"></i> @itemC.Tiempo | Yo</span>
+                                                <h4>@itemC.Comentario</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="mensaje-izq col-12" style="padding:1%;">
+                                        <div class="cuerpo_msj">
+                                            <div class="msj-texto">
+                                                <span class="tiempo"><i class="icon-clock"></i> @itemC.Tiempo | @itemC.FKUsuario</span>
+                                                <h4>@itemC.Comentario</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                        else
+                        {
+                        <div class="float-left col-12" style="padding:1%;">
+                            <h6>Sin Comentarios, Por favor no realice ninguno :P</h6>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <div>
+                    <form method="post" id="formcommentary">
+                        <input id="tarea" type="text" value="@item.IDToma" style="display:none" />
+                        <input id="proyecto" type="text" value="@item._folio" style="display:none" />
+                        <div class="input-group input-group-newsletter">
+                            <input type="text" id="mensaje" class="form-control" placeholder="Mensaje...">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" type="submit" id="submit-button"><i class="fas fa-angle-double-right"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+    </div>
+
+
+<script src="~/Scripts/Commentary.js"></script>
+<script>
+    $(function () {
+        Commentary.init();
+    });
+</script>

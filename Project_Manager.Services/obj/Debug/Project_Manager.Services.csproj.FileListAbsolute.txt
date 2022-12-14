@@ -1,0 +1,18 @@
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\bin\Debug\Project_Manager.Services.dll
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\bin\Debug\Project_Manager.Services.pdb
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.csprojAssemblyReference.cache
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.csproj.CoreCompileInputs.cache
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.dll
+C:\Users\Fernando\Desktop\UTM\Proyectos Integradores\Project_Manager\Project_Manager.Services\obj\Debug\Project_Manager.Services.pdb
+C:\Users\luis1\OneDrive\Escritorio\ProyectoV1\Project_Manager.Services\bin\Debug\Project_Manager.Services.dll
+C:\Users\luis1\OneDrive\Escritorio\ProyectoV1\Project_Manager.Services\bin\Debug\Project_Manager.Services.pdb
+C:\Users\luis1\OneDrive\Escritorio\ProyectoV1\Project_Manager.Services\obj\Debug\Project_Manager.Services.csprojAssemblyReference.cache
+C:\Users\luis1\OneDrive\Escritorio\ProyectoV1\Project_Manager.Services\obj\Debug\Project_Manager.Services.csproj.CoreCompileInputs.cache
+C:\Users\luis1\OneDrive\Escritorio\ProyectoV1\Project_Manager.Services\obj\Debug\Project_Manager.Services.dll
+C:\Users\luis1\OneDrive\Escritorio\ProyectoV1\Project_Manager.Services\obj\Debug\Project_Manager.Services.pdb
+C:\Users\Uriel Xool\Documents\Ingenieria\Web\project_manajer-master\Project_Manager.Services\bin\Debug\Project_Manager.Services.dll
+C:\Users\Uriel Xool\Documents\Ingenieria\Web\project_manajer-master\Project_Manager.Services\bin\Debug\Project_Manager.Services.pdb
+C:\Users\Uriel Xool\Documents\Ingenieria\Web\project_manajer-master\Project_Manager.Services\obj\Debug\Project_Manager.Services.csproj.AssemblyReference.cache
+C:\Users\Uriel Xool\Documents\Ingenieria\Web\project_manajer-master\Project_Manager.Services\obj\Debug\Project_Manager.Services.csproj.CoreCompileInputs.cache
+C:\Users\Uriel Xool\Documents\Ingenieria\Web\project_manajer-master\Project_Manager.Services\obj\Debug\Project_Manager.Services.dll
+C:\Users\Uriel Xool\Documents\Ingenieria\Web\project_manajer-master\Project_Manager.Services\obj\Debug\Project_Manager.Services.pdb

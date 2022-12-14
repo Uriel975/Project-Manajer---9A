@@ -1,0 +1,8 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/packages/EASendMail.7.7.0.6/lib
+/.vs/project_manajer/v16
+/Project_Manager/bin
+/packages/EASendMail.7.7.0.6

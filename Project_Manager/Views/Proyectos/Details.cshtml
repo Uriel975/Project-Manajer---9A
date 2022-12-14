@@ -1,0 +1,278 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Proyecto = (Project_Manager.Services.BO.TblProyectosBO)ViewBag.ProyectoObj;
+    var proyectoaEmpleado = (List<Project_Manager.Services.BO.TblProyectoEmpleadoBO>)ViewBag.proyectoaEmpleado;
+    var asignacion = (List<Project_Manager.Services.BO.TblEmpleadoBO>)ViewBag.ProyectoList;
+
+}
+
+
+<div style="padding:5%">
+    <div class="card border-dark text-black">
+        <div class="card-header" id="TextCenter">
+            <b>
+                <span style="font-size:30px" class="card-text"><b>Proyecto: @Proyecto.NombreProyecto</b></span>
+                <a title="Editar" onclick="Project.evts.getProyeInfo('@Proyecto.Folio')" class="btn btn-light float-right"><i class="far fa-edit"></i></a>
+                <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", Proyecto.Folio))" class="btn btn-light float-right"><i class="fas fa-folder-plus"></i></a>
+            </b>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                <div class="group form-group">
+                    <div class="col-sm-6" style="float:left; position:relative">
+                        <fieldset>
+                            <legend>Datos Generales</legend>
+                            <dl class="row">
+                                @if (Proyecto.Estatus == 0)
+                                {
+                                    <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                    <dd class="col-sm-8"><samp style="color:green">Activo</samp></dd>
+                                }
+                                else
+                                {
+                                    if (Proyecto.Estatus == 1)
+                                    {
+                                        <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                        <dd class="col-sm-8"><samp style="color:green">En retroalimentacion</samp></dd>
+                                    }
+                                    else
+                                    {
+                                        if (Proyecto.Estatus == 2)
+                                        {
+                                            <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                            <dd class="col-sm-8"><samp style="color:red">En reparacion</samp></dd>
+                                        }
+                                        else
+                                        {
+                                            if (Proyecto.Estatus == 3)
+                                            {
+                                                <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                                <dd class="col-sm-8"><samp style="color:green">Finalizado</samp></dd>
+                                            }
+                                            else
+                                            {
+                                                <dt class="col-sm-4"><label class="label">Estado: </label></dt>
+                                                <dd class="col-sm-8"><samp style="color:red">Suspendido</samp></dd>
+                                            }
+                                        }
+                                    }
+                                }
+
+                                <dt class="col-sm-4"><label class="label">Fecha De Entrega:</label></dt>
+                                <dd class="col-sm-8"><samp style="color:black">@Proyecto.FechaLimite</samp></dd>
+
+                                <dt class="col-sm-4"><label class="label">Prioridad:</label></dt>
+                                <dd class="col-sm-8"><samp style="color:black">@Proyecto.Prioridad</samp></dd>
+
+                                <dt class="col-sm-4"><label class="label">Empresa Dueña:</label></dt>
+                                <dd class="col-sm-8"><samp style="color:black">@Proyecto.NombreEmpresa</samp></dd>
+
+                                <dt class="col-sm-4"><label class="label">Detalles:</label></dt>
+                                <dd class="col-sm-8" id="TextJustify">
+                                    <samp style="color:black">
+                                        @Proyecto.Descripcion
+                                    </samp>
+                                </dd>
+                            </dl>
+                        </fieldset>
+                    </div>
+                    <div class="col-sm-6" style="float:left; position:relative">
+                        <fieldset>
+                            <legend>Trabajadores del proyecto @Proyecto.Actual/@Proyecto.Limite</legend>
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <dl class="row">
+                                                @foreach (Project_Manager.Services.BO.TblProyectoEmpleadoBO item in proyectoaEmpleado)
+                                                {
+                                                    <div class="row" style="padding:5%">
+                                                        <dt class="col-sm-4"><label class="label">Empleado:</label></dt>
+                                                        <dd class="col-sm-8"><samp style="color:black">@item.NombreEmpleado</samp></dd>
+                                                        <dt class="col-sm-4"><label class="label">Incorporacion:</label></dt>
+                                                        <dd class="col-sm-8"><samp style="color:black">@item.FechaIngreso</samp></dd>
+                                                        @if (item.EstadoEmple == 0)
+                                                        {
+                                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
+                                                            <dd class="col-sm-8"><samp style="color:black">Con autorización</samp></dd>
+                                                        }
+                                                        else
+                                                        {
+                                                            <dt class="col-sm-4"><label class="label">Permiso:</label></dt>
+                                                            <dd class="col-sm-8"><samp style="color:black">Sin autorización</samp></dd>
+                                                        }
+                                                        <dt class="col-sm-4"><label class="label">Contacto:</label></dt>
+                                                        <dd class="col-sm-8"><a href="https://mail.google.com/mail/u/0/"><i class="fas fa-envelope-open-text"></i></a></dd>
+                                                    </div>
+                                                }
+
+                                            </dl>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="content-wrapper" class="d-flex flex-column" style="padding:5%">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                @if (Proyecto.Actual != Proyecto.Limite)
+                {
+                    if (asignacion.Count > 0)
+                    {
+                        <div class="card shadow mb-4">
+
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+
+                                            <tr>
+                                                <th>Nombre completo</th>
+                                                <th>Telefono</th>
+                                                <th>Seleccionar</th>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                            @foreach (Project_Manager.Services.BO.TblEmpleadoBO item in asignacion)
+                                            {
+
+                                                <tr>
+                                                    <td>@item.NombreEmpleado @item.ApellidoPEmpleado @item.ApellidoMEmpleado</td>
+                                                    <td>@item.TelefonoEmpleado</td>
+                                                    <td align="center">
+                                                        <button type="button" onclick="Project.evts.asignarProyecto('@item.IDEmpleado', '@Proyecto.Folio', '@Proyecto.NombreProyecto', '@Proyecto.Actual')" class="btn btn-warning"><i class="fas fa-user-plus"></i></button>
+                                                    </td>
+                                                </tr>
+
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <h2> Sin resultados</h2>
+
+                    }
+                }
+                else
+                {
+                    <h1>No puedes agregar más empleados ya que has alcanzado el liminte</h1>
+                }
+
+
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; FernandoISK 2019</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="mdlDetail">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <form id="frmCreate" class="modal-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeStr">Actualizar Proyecto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Nombre Proyecto</label>
+                            <input type="text" autocomplete="off" class="form-control" name="txtNombre" id="txtNombrePro" value="@Proyecto.NombreProyecto" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <div class="row col-lg-12">
+                                <label asp-for="veh.modelo" class="label">Descripción</label>
+                            </div>
+                            <div class="row col-lg-12">
+                                <textarea class="form-control" maxlength="250" id="mensaje" rows="4" cols="70">@Proyecto.Descripcion</textarea>
+                            </div>
+                            <div class="row col-lg-12">
+                                <div id="contador">0/250</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label asp-for="veh.modelo" class="label">Prioridad*</label>
+                            <select asp-for="veh.modelo" class="form-control col-md-12" id="cmdPrioridad">
+                                <option value="@Proyecto.Prioridad">@Proyecto.Prioridad preoridad</option>
+                                <option value="Alta">Alta preoridad</option>
+                                <option value="Media">Media preoridad</option>
+                                <option value="Baja">Baja preoridad</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label asp-for="veh.modelo" class="label">Maximo de empleados*</label>
+                            <select asp-for="veh.modelo" class="form-control col-md-12" id="cmdmaxEm">
+                                <option value="@Proyecto.Limite">@Proyecto.Limite</option>
+                                @for (int i = 1; i < 16; i++)
+                                {
+                                    <option value="@i">@i</option>
+
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Actualizar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const mensaje = document.getElementById('mensaje');
+    const contador = document.getElementById('contador');
+
+    mensaje.addEventListener('input', function (e) {
+        const target = e.target;
+        const longitudMax = target.getAttribute('maxlength');
+        const longitudAct = target.value.length;
+        contador.innerHTML = `${longitudAct}/${longitudMax}`;
+    });
+</script>
+<script src="~/Scripts/ProjectAll.js"></script>
+<script>
+    $(function () {
+        Project.init();
+    });
+</script>

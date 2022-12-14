@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Agendas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Juntas = (Project_Manager.Services.BO.TblJuntasBO)ViewBag.JuntasObj;
+}
+
+<div style="padding:5%">
+    <div class="card border-dark text-black">
+        <div class="card-header" id="TextCenter">
+            <b>
+                <h2 class="card-text">Nueva solicitud de agenda</h2>
+            </b>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                <div class="group form-group">
+                    <div class="col-sm-12" style="float:left; position:relative">
+                        <fieldset>
+                            <legend>Informacion</legend>
+                            <dl class="row">
+                                <div class="col-lg-12">
+                                    <h1>Muy buen día señor(a) @Session["Nombre"]</h1>
+                                </div>
+                                <div class="col-lg-12">
+                                    <p>
+                                        El motivo de esta junta es para poder pactar una junta con la finalidad de @Juntas.Motivo . Le he sugerido la fecha  @Juntas.FechaJunta a las @Juntas.HoraJunta horas. en dado caso de estar usted de acuerdo con esta fecha presione el boton 'agentar' o de su contrario  usted puede sugerirnos alguna fecha.
+                                        Estare al pendiente de su respuesta y recuerde que puede contactarnos por correo electronico o por mi numero de celular. aquí se los proporciono. Tenga un exelente día
+                                    </p>
+                                    <ol>
+                                        <li><span style="color:black">Numero de celular: </span>@Juntas.TelefonoEmpleado</li>
+                                        <li><a href="mailto:@Juntas.Correo"> <span style="color:black">Correo electronico:</span>@Juntas.Correo</a></li>
+                                    </ol>
+                                </div>
+                            </dl>
+                        </fieldset>
+
+                    </div>
+                    <div class="row">
+                        @if (Juntas.Estatus == 0)
+                        {
+                            <button type="button" onclick="Rol.evts.confirm('@Juntas.IDJuntas')" class="btn btn-primary">Agendar</button>
+                            <button type="button" onclick="Rol.evts.OpenModalTime('@Juntas.IDJuntas')" class="btn btn-success" data-toggle="tooltip" title="Editar">Sugerir Fecha</button>
+                        }
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="mdlDetail">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <form id="frmCreate" class="modal-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="employeeStr">Nuevo Sugerencia de fecha</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-9">
+                            <label>Nueva Fecha</label>
+                            <input type="date" autocomplete="off" class="form-control" name="txtNombre" id="txtfecha" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Nueva hora</label>
+                            <input type="time" autocomplete="off" class="form-control" name="txtNombre" id="txthora" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer bg-whitesmoke br">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/RolEmpleado.js"></script>
+
+<script>
+    $(function () {
+        Rol.init();
+    });
+</script>
+

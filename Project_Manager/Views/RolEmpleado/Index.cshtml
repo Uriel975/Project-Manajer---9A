@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Tareas = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.TareasList;
+
+}
+
+@*<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Proyecto</h1>
+    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+</div>*@
+
+<div style="padding:5%">
+
+    @if (Tareas.Count > 0)
+    {
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Datos de los proyecto</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+
+                            <tr>
+                                <th scope="col">Nombre del proyecto</th>
+                                <th scope="col">Progreso</th>
+                                <th scope="col">Detalles</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (Project_Manager.Services.BO.TblProyectosBO item in Tareas)
+                            {
+                                int actual = item.Tareas - item.Pendiente;
+                                <tr>
+                                    <td>@item.NombreProyecto</td>
+                                    <td align="center">
+                                        <form name="formulario" method="post" action="/send.php">
+                                            <!-- Medidor -->
+                                            <meter min="0" max="@item.Tareas" low="1" high="3" optimum="100" value="@actual"></meter>
+                                        </form>
+                                    </td>
+                                    <td align="center">
+                                        <a title="Tareas" href="@Url.Content(string.Format("~/Proyectos/Task?i={0}", item.Folio))" class="btn btn-warning"><i class="fas fa-folder-plus"></i></a>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2> Sin resultados</h2>
+
+    }
+</div>

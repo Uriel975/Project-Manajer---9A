@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h2>Agregar Cliente</h2>
+        <p class="mb-4">Todos los campos señalados con un "*" son oblogatorios</p>
+    </div>
+    <div class="card-body">
+        <form method="post" id="frmCreate">
+            <div class="group form-group">
+                <fieldset>
+                    <legend>Datos de Representante</legend>
+                    <div class="row col-lg-12">
+                        <div class="col-md-4">
+                            <label class="label">Nombre(s)*</label>
+                            <input type="text" class="form-control" id="txtNombre">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label">Apellido Paterno*</label>
+                            <input type="text" class="form-control" id="txtApellidoP">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label ">Apellido Materno*</label>
+                            <input type="text" class="form-control" id="txtApellidoM">
+                        </div>
+                    </div>
+                    <div class="row col-lg-12">
+                        <div class="col-lg-5">
+                            <label class="label">Telefono celular*</label>
+                            <input type="text" class="form-control input-number" id="txtCelular">
+                        </div>
+                        <div class="col-lg-5">
+                            <label class="label">Correo electronico*</label>
+                            <input type="text" class="form-control" id="txtCorreo">
+                        </div>
+                    </div>
+                    <legend>Datos Empresa</legend>
+                    <div class="row col-lg-12">
+                        <div class="row col-lg-12">
+                            <div class="col-md-8">
+                                <label class="label">Nombre de la empresa*</label>
+                                <input type="text" class="form-control" id="txtNombreEmpresa">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">Nombre de usuario*</label>
+                                <input type="text" class="form-control" id="txtUsuario">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label">Contraseña*</label>
+                            <input type="password" class="form-control" id="txtPreContraseña">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label">Confirme Contraseña</label>
+                            <input type="password" class="form-control" id="txtContraseña">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="group">
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/Client.js"></script>
+<script>
+    $(function () {
+        Client.init();
+    });
+</script>
+

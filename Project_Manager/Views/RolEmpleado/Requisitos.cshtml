@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Requisitos";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <h2>Agregar requisitos</h2>
+        <p class="mb-4">Todos los campos señalados con un "*" son oblogatorios</p>
+    </div>
+    <div class="card-body">
+        <div class="row">
+
+            <div class="col-lg-6">
+
+                <!-- Default Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        
+                        <h6 class="m-0 font-weight-bold text-primary">
+                        <span>A4-One Web</span> 
+                        -Boton inicar no responde</h6>
+                        
+                        <button type="button" class="btn btn-success btn-circle btn-sm"><i class="fas fa-dolly"></i></button>
+                        <a href="#" class="btn btn-success btn-circle btn-sm"><i class="fas fa-exclamation"></i></a>
+                    </div>
+                    <div class="card-body">
+                        El boton de iniciar sesión no responde al presionarlo, nisiquiera da alguna indicación
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-lg-6">
+                <!-- Basic Card Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary"><span>A4-One Web</span> Algo raro </h6>
+                        <button type="button" class="btn btn-success btn-circle btn-sm"><i class="fas fa-dolly"></i></button>
+                        <a href="#" class="btn btn-success btn-circle btn-sm"><i class="fas fa-exclamation"></i></a>
+                    </div>
+                    <div class="card-body">
+                        En la parte inferior derecha de la pagina administrativa, signo de ';' al final.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/Scripts/GlobalCliente.js"></script>
+<script>
+    $(function () {
+        GlobalClientes.init();
+    });
+</script>

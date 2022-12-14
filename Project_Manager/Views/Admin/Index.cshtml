@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Empleados = (List<Project_Manager.Services.BO.TblEmpleadoBO>)ViewBag.EmpleadoList;
+    var Clientes = (List<Project_Manager.Services.BO.TblClienteBO>)ViewBag.ClienteList;
+    var Proyecto = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.ProyectoList;
+    var Tareas = (List<Project_Manager.Services.BO.TblProyectosBO>)ViewBag.TareasList;
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!--<div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    </div>-->
+
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Empleados</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Empleados.Count()</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-secret fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Clientes</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Clientes.Count()</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-tag fa-2x text-gray-300""></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Proyectos</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@Proyecto.Count()</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="contenedorTiempo">
+                            <div class="widget">
+                                <div class="reloj">
+                                    <p id="horas" class="horas"></p>
+                                    <p>:</p>
+                                    <p id="minutos" class="minutos"></p>
+                                    <p>:</p>
+                                    <div class="cajaSegundos">
+                                        <p id="ampm" class="ampm"></p>
+                                        <p id="segundos" class="segundos"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Tareas.Count > 0)
+    {
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Todos los proyectos</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+
+                            <tr>
+                                <th scope="col">Nombre del proyecto</th>
+                                <th scope="col">Progreso</th>
+                                <th scope="col">Detalles</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (Project_Manager.Services.BO.TblProyectosBO item in Tareas)
+                            {
+                                int actual = item.Tareas - item.Pendiente;
+                                <tr>
+                                    <td>@item.NombreProyecto</td>
+                                    <td align="center">
+                                        <form name="formulario" method="post" action="/send.php">
+                                            <!-- Medidor -->
+                                            <meter min="0" max="@item.Tareas" low="1" high="3" optimum="100" value="@actual">
+                                                </form>
+                                    </td>
+                                    <td align="center">
+                                        <a href="@Url.Content(string.Format("~/Proyectos/Details?i={0}", item.Folio))" title="Detalles" class="btn btn-warning"><i class="far fa-file-alt"></i></a>   
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2> Sin resultados</h2>
+
+    }
+</div>
+
+
+

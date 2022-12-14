@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "ListaJuntas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Juntas = (List<Project_Manager.Services.BO.TblJuntasBO>)ViewBag.JuntasList;
+}
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Mis juntas</h1>
+            @if (Juntas.Count != 0)
+            {
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Datos de los empleados</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+
+                                    <tr>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Fecha</th>
+                                        <th>Estado</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+                                    @foreach (Project_Manager.Services.BO.TblJuntasBO item in Juntas)
+                                    {
+                                        <tr>
+                                            <td>@item.NombreJuntas</td>
+                                            @if (item.Estatus == 1)
+                                            {
+                                                <td><i class="fas fa-fire"></i>@item.FechaJunta @item.HoraJunta</td>
+                                            }
+                                            else
+                                            {
+                                                <td>@item.FechaJunta @item.HoraJunta</td>
+                                            }
+
+                                            @{
+                                                string fechaJunta = item.FechaJunta;
+                                                var parseDate = DateTime.Parse(fechaJunta);
+                                                int Conparacion = DateTime.Compare(parseDate, DateTime.Now);
+                                            }
+
+                                            @if (Conparacion < 0)
+                                            {
+
+                                                <td>
+                                                    <button type="button" onclick="Rol.evts.confirm('@item.IDJuntas')" class="btn btn-primary">Reporte</button>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                if (item.Estatus == 0)
+                                                {
+                                                    <td align="center">
+                                                        Esperando respuesta
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    if (item.Estatus == 1)
+                                                    {
+                                                        <td align="center">
+                                                            <button type="button" onclick="Rol.evts.confirm('@item.IDJuntas')" class="btn btn-primary">Confirmar</button>
+                                                        </td>
+                                                    }
+                                                    else if (item.Estatus == 2)
+                                                    {
+                                                        <td align="center">
+                                                            Confirmada
+                                                        </td>
+                                                    }
+                                                }
+                                            }
+
+
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h1>No tiene nunguna junta programada</h1>
+            }
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; FernandoISK 2019</span>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="~/Scripts/RolEmpleado.js"></script>
+

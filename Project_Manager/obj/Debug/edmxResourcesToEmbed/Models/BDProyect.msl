@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BD_APManagerModelStoreContainer" CdmEntityContainer="BD_APManagerEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="BD_APManagerModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAdministrador">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblAdministrador">
+        <MappingFragment StoreEntitySet="tblAdministrador">
+          <ScalarProperty Name="IDAdmin" ColumnName="IDAdmin" />
+          <ScalarProperty Name="NombreAdmin" ColumnName="NombreAdmin" />
+          <ScalarProperty Name="ApellidoAdmin" ColumnName="ApellidoAdmin" />
+          <ScalarProperty Name="FKRol" ColumnName="FKRol" />
+          <ScalarProperty Name="FKCuenta" ColumnName="FKCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblAsignacion">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblAsignacion">
+        <MappingFragment StoreEntitySet="tblAsignacion">
+          <ScalarProperty Name="IDAsignacion" ColumnName="IDAsignacion" />
+          <ScalarProperty Name="EstadoAsignacion" ColumnName="EstadoAsignacion" />
+          <ScalarProperty Name="FKEmpleado" ColumnName="FKEmpleado" />
+          <ScalarProperty Name="FKProblemas" ColumnName="FKProblemas" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCliente">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblCliente">
+        <MappingFragment StoreEntitySet="tblCliente">
+          <ScalarProperty Name="IDCliente" ColumnName="IDCliente" />
+          <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+          <ScalarProperty Name="ApellidoCliente" ColumnName="ApellidoCliente" />
+          <ScalarProperty Name="TelefonoCliente" ColumnName="TelefonoCliente" />
+          <ScalarProperty Name="GeneroCliente" ColumnName="GeneroCliente" />
+          <ScalarProperty Name="EmpresaCliente" ColumnName="EmpresaCliente" />
+          <ScalarProperty Name="RepresentanteCliente" ColumnName="RepresentanteCliente" />
+          <ScalarProperty Name="FKRol" ColumnName="FKRol" />
+          <ScalarProperty Name="FKCuenta" ColumnName="FKCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCuenta">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblCuenta">
+        <MappingFragment StoreEntitySet="tblCuenta">
+          <ScalarProperty Name="IDCuenta" ColumnName="IDCuenta" />
+          <ScalarProperty Name="CorreoCuenta" ColumnName="CorreoCuenta" />
+          <ScalarProperty Name="ContraCuenta" ColumnName="ContraCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblDocumentacion">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblDocumentacion">
+        <MappingFragment StoreEntitySet="tblDocumentacion">
+          <ScalarProperty Name="IDDocumentacion" ColumnName="IDDocumentacion" />
+          <ScalarProperty Name="TituloDocumentacion" ColumnName="TituloDocumentacion" />
+          <ScalarProperty Name="DescripcionDocumentacion" ColumnName="DescripcionDocumentacion" />
+          <ScalarProperty Name="EstimacionDocumentacion" ColumnName="EstimacionDocumentacion" />
+          <ScalarProperty Name="FechaDocumentacion" ColumnName="FechaDocumentacion" />
+          <ScalarProperty Name="FKAsignacion" ColumnName="FKAsignacion" />
+          <ScalarProperty Name="FKEmpleado" ColumnName="FKEmpleado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmpleado">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblEmpleado">
+        <MappingFragment StoreEntitySet="tblEmpleado">
+          <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+          <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+          <ScalarProperty Name="ApellidoEmpleado" ColumnName="ApellidoEmpleado" />
+          <ScalarProperty Name="TelefonoEmpleado" ColumnName="TelefonoEmpleado" />
+          <ScalarProperty Name="Nacimiento" ColumnName="Nacimiento" />
+          <ScalarProperty Name="GeneroEmpleado" ColumnName="GeneroEmpleado" />
+          <ScalarProperty Name="FKRol" ColumnName="FKRol" />
+          <ScalarProperty Name="FKCuenta" ColumnName="FKCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProblema">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblProblema">
+        <MappingFragment StoreEntitySet="tblProblema">
+          <ScalarProperty Name="IDProblema" ColumnName="IDProblema" />
+          <ScalarProperty Name="TituloProblema" ColumnName="TituloProblema" />
+          <ScalarProperty Name="DescripcionProblema" ColumnName="DescripcionProblema" />
+          <ScalarProperty Name="FechaProblema" ColumnName="FechaProblema" />
+          <ScalarProperty Name="FKProyecto" ColumnName="FKProyecto" />
+          <ScalarProperty Name="FKCliente" ColumnName="FKCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProyectos">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblProyectos">
+        <MappingFragment StoreEntitySet="tblProyectos">
+          <ScalarProperty Name="IDProyecto" ColumnName="IDProyecto" />
+          <ScalarProperty Name="NombreProyecto" ColumnName="NombreProyecto" />
+          <ScalarProperty Name="DescripcionProyecto" ColumnName="DescripcionProyecto" />
+          <ScalarProperty Name="PrioridadProyecto" ColumnName="PrioridadProyecto" />
+          <ScalarProperty Name="FechaProyecto" ColumnName="FechaProyecto" />
+          <ScalarProperty Name="EstadoProyecto" ColumnName="EstadoProyecto" />
+          <ScalarProperty Name="FKCliente" ColumnName="FKCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRol">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblRol">
+        <MappingFragment StoreEntitySet="tblRol">
+          <ScalarProperty Name="IDRol" ColumnName="IDRol" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTarjeta">
+      <EntityTypeMapping TypeName="BD_APManagerModel.tblTarjeta">
+        <MappingFragment StoreEntitySet="tblTarjeta">
+          <ScalarProperty Name="IDTarjeta" ColumnName="IDTarjeta" />
+          <ScalarProperty Name="NumeroTarjeta" ColumnName="NumeroTarjeta" />
+          <ScalarProperty Name="CVVTarjeta" ColumnName="CVVTarjeta" />
+          <ScalarProperty Name="FechaTarjeta" ColumnName="FechaTarjeta" />
+          <ScalarProperty Name="FKCliente" ColumnName="FKCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

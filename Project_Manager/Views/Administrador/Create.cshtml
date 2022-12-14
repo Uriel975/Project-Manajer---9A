@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Administrador = (Project_Manager.Services.BO.TblAdministradorBO)ViewBag.AdministradorList;
+}
+
+<!-- ADMINISTRADOR  -->
+<div class="card">
+    <div class="card-header">
+        Agregar Administrador
+    </div>
+    <div class="card-body">
+        <form method="post" id="formCreate">
+            <div class="group form-group">
+                <input type="hidden" class="form-control" asp-for="chofer.id_chofer">
+                <fieldset>
+                    <!-- ADMINISTRADOR  -->
+                    <legend>Datos personales</legend>
+                    <div class="row col-lg-12">
+                        <div class="col-md-4">
+                            <label class="label">Nombre del Administrador</label>
+                            <input type="text" class="form-control" id="txtNombreAdm">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label">Apellido Paterno</label>
+                            <input type="text" class="form-control" id="txtApellidoPAdm">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="label ">Apellido Materno</label>
+                            <input type="text" class="form-control" id="txtApellidoMAdm">
+                        </div>
+                    </div>
+                    <!-- ADMINISTRADOR  -->
+                    <legend>Datos De Cuenta</legend>
+                    <div class="row col-lg-12">
+                        <div class="row col-lg-12">
+                            <div class="col-md-8">
+                                <label class="label">Correo Electronico</label>
+                                <input type="text" class="form-control" id="txtCorreoAdm">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="label">Nombre de usuario</label>
+                                <input type="text" class="form-control" id="txtUsuarioAdm">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label">Contraseña</label>
+                            <input type="password" class="form-control" id="txtPreContraseñaAdm">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="label">Confirme Contraseña</label>
+                            <input type="password" class="form-control" id="txtContraseñaAdm">
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="group">
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ADMINISTRADOR  -->
+
+<script src="~/Scripts/Administrador.js"></script>
+<script>
+    $(function () {
+        Administrador.init();
+    });
+</script>
+

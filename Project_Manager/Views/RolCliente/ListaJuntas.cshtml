@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "ListaJuntas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var Juntas = (List<Project_Manager.Services.BO.TblJuntasBO>)ViewBag.JuntasList;
+}
+
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Tablas de juntas</h1>
+            <p class="mb-4">Esta tabla contiene todos los datos basicos de todos los juntas.</p>
+            <!-- DataTales Example -->
+            @if (Juntas.Count > 0)
+            {
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Datos de los juntas</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+
+                                    <tr>
+                                        <th scope="col">Titulo</th>
+                                        <th scope="col">Remitente</th>
+                                        <th>Estado de lectura</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (Project_Manager.Services.BO.TblJuntasBO item in Juntas)
+                                    {
+                                        <tr>
+                                            <td>@item.NombreJuntas</td>
+                                            <td>@item.NombreEmpleado</td>
+                                            <td align="center">
+                                                @if (item.Lectura == 0)
+                                                {
+                                                    <a title="Tareas" href="@Url.Content(string.Format("~/RolCliente/Agendas?i={0}", item.IDJuntas))" class="btn btn-warning float-right"><i class="fas fa-low-vision"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a title="Tareas" href="@Url.Content(string.Format("~/RolCliente/Agendas?i={0}", item.IDJuntas))" class="btn btn-warning float-right"><i class="fab fa-phabricator"></i></a>
+                                                }
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <h2> Sin resultados</h2>
+
+            }
+
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; FernandoISK 2019</span>
+            </div>
+        </div>
+    </footer>
+</div>
+
